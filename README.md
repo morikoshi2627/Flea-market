@@ -8,11 +8,12 @@
 - 画像をブラウザからアクセスするために、`php artisan migrate --seed`を実行後、`php artisan storage:link`コマンドを実行してください。 
 
 ### テストユーザー（ダミーユーザー）情報  
-- 出品太郎  
+1. 出品太郎  
 - メールアドレス：seller@example.com  
 - パスワード：password123  
-
-- 出品次郎(ダミー商品出品者)  
+  
+  
+2. 出品次郎(ダミー商品出品者)  
 - メールアドレス：seller2@example.com  
 - パスワード：password456  
 
