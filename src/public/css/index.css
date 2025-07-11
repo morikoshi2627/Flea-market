@@ -1,0 +1,201 @@
+/* .header-inner{
+    background: #000;
+    padding: 15px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-search{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.header-right{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-search{
+    flex: 1;
+    justify-content: center;
+}
+
+.search-form{
+    display: flex;
+    gap: 8px;
+}
+/* 検索フィールド */
+/* .search-input{
+    padding: 6px 80px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+}
+/* 検索ボタン */
+/* .search-button{
+    padding: 6px 12px;
+    background-color: #000;
+    color: white;
+    font-size: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.logout-button{
+    margin-left: 12px;
+    padding: 6px 12px;
+    background-color: #000;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mypage-button{
+    margin-left: 12px;
+    padding: 6px 12px;
+    background-color: #000;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.listing-button{
+    margin-left: 12px;
+    padding: 6px 12px;
+    background-color: #ffffff;
+    color: #000;
+    text-decoration: none;
+    border: none;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-actions{
+    display: inline; 
+}
+
+.logout-button,
+.mypage-button,
+.listing-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+} */
+
+
+
+/* ヘッダーより下部分 */
+.main-inner {
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.link-area{
+    display: flex;
+    gap: 50px;
+    border-bottom: 1px solid #000;
+    padding: 30px 100px;
+    margin-bottom: 50px;
+}
+
+.recommendation-button{
+    color: #5f5f5f;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding-right: 30px;
+}
+
+.mylist-button{
+    color: tomato;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 1400px;
+    text-align: center;
+    gap: 25px;
+    margin: 0 auto;
+}
+
+.item-name{
+    margin-top: 5px;
+    font-size: 15px;
+    color: #000;
+    text-decoration: none;
+
+}
+
+/* カード全体をセンター寄せしたい場合 */
+.item-card {
+    width: 200px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.goods-img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+
+
+/* ページネーション */
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.custom-pagination nav {
+    display: flex;
+}
+
+.custom-pagination .pagination {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+}
+
+.custom-pagination .page-item a,
+.custom-pagination .page-item span {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    transition: background-color 0.2s;
+}
+
+.custom-pagination .page-item.active span {
+    background-color: #627fb2;
+    color: #fff;
+    font-weight: bold;
+    border-color: #627fb2;
+}
+
+.custom-pagination .page-item a:hover {
+    background-color: #627fb2;
+    color: #fff;
+    border-color: #627fb2;
+}

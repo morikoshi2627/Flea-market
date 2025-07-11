@@ -1,0 +1,99 @@
+.header-inner {
+  background: #000;
+  padding: 15px 50px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-search {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 400px;
+}
+
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-search {
+  flex: 1;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.search-form {
+  display: flex;
+  gap: 8px;
+}
+
+/* 検索フィールド */
+.search-input {
+  padding: 6px 80px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/* 検索ボタン */
+.search-button {
+  padding: 6px 12px;
+  background-color: #000;
+  color: white;
+  font-size: 15px;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-button {
+  margin-left: 12px;
+  margin-top: 10px;
+  padding: 3px 12px;
+  background-color: #000;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mypage-button {
+  margin-left: 12px;
+  margin-top: 10px;
+  padding: 3px 12px;
+  background-color: #000;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.listing-button {
+  margin-left: 12px;
+  margin-top: 10px;
+  padding: 3px 12px;
+  background-color: #ffffff;
+  color: #000;
+  text-decoration: none;
+  border: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-actions {
+  display: inline;
+}
+
+.logout-button,
+.mypage-button,
+.listing-button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
