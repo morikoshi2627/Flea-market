@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\VerifyEmailViewResponse;
+use Laravel\Fortify\Contracts\VerifyEmailResponse;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -37,6 +39,11 @@ class FortifyServiceProvider extends ServiceProvider
                      return view('auth.login');
                  });
 
+        // メール認証ビューの設定（追加！）
+        Fortify::verifyEmailView(function () {
+            return view('auth.verify-email');
+        });
+
         // フォームリクエストを用いた認証ロジック
         Fortify::authenticateUsing(function ($request) {
             $formRequest = app(\App\Http\Requests\LoginRequest::class);
@@ -61,6 +68,32 @@ class FortifyServiceProvider extends ServiceProvider
             
                      return Limit::perMinute(10)->by($email . $request->ip());
                  });
-            
+
+        $this->app->instance(
+            VerifyEmailViewResponse::class,
+            new class implements VerifyEmailViewResponse {
+                public function toResponse($request)
+                {
+                    return view('auth.verify-email'); // 任意のBladeファイル
+                }
+            }
+        );
+
+
+        $this->app->singleton(VerifyEmailResponse::class, function () {
+            return new class implements VerifyEmailResponse {
+                public function toResponse($request)
+                {
+                    $user = auth()->user();
+
+                    // プロフィール未設定なら編集画面へ
+                    if (!$user->profile_completed) {
+                        return redirect('/mypage/profile');
+                    }
+
+                    return redirect('/'); // 設定済みならトップページへ
+                }
+            };
+        });
     }
 }

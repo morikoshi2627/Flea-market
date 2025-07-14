@@ -14,6 +14,8 @@ services:
         build: ./docker/php
         volumes:
             - ./src:/var/www/
+        depends_on:
+            - mailhog
 
     mysql:
         image: mysql:8.0.26
@@ -41,3 +43,10 @@ services:
             - mysql
         ports:
             - 8080:80
+
+    # メール認証機能
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "8025:8025"
+            - "1025:1025"

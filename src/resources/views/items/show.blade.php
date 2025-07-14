@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/show.css') }}">
+<link rel="stylesheet" href="{{ asset('css/show.css') }}?v={{ time() }}">
 @endsection
 
 @section('content')
@@ -92,7 +92,7 @@
         @endif
 
         <!-- コメント投稿フォーム -->
-         <h4 class="comment-form">商品へのコメント</h4>
+        <h4 class="comment-form">商品へのコメント</h4>
         @if (Auth::check())
         <form action=" {{ route('comments.store', $item->id) }}" method="POST">
             @csrf
@@ -103,11 +103,18 @@
             </div>
             @enderror
 
-            <button class="button-submit" type="submit">コメントを送信する</button>
-            </form>
-            @else
-            <p><a href="{{ route('login') }}">ログイン</a>するとコメントを投稿できます。</p>
+            <!--　コメント送信完了メッセージ  -->
+            @if (session('success'))
+            <div class="flash-message flash-message-success">
+                {{ session('success') }}
+            </div>
             @endif
+
+            <button class="button-submit" type="submit">コメントを送信する</button>
+        </form>
+        @else
+        <p><a href="{{ route('login') }}">ログイン</a>するとコメントを投稿できます。</p>
+        @endif
     </div>
 </div>
 @endsection

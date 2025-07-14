@@ -1,0 +1,107 @@
+.main-inner{
+    max-width: 100%;
+}
+
+/* プロフィール欄 */
+.profile-inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 150px;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 40px 0;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 18px;
+}
+
+.user-name-strong{
+    margin-right: 30px;
+}
+
+.edit-button {
+    padding: 8px 16px;
+    border: 1px solid #ff5655;
+    color: #ff5655;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+/* 出品購入欄 */
+.history-wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.history-header {
+    display: flex;
+    /* justify-content: space-around; */
+    margin-bottom: 10px;
+    margin-left: 150px;
+}
+
+.history-title {
+    font-size: 20px;
+    text-decoration: none;
+    color: #555;
+    padding: 8px 16px;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+    margin-right: 100px;
+}
+
+.history-title.active {
+    font-weight: bold;
+    color: #ff5655;
+    margin-right: 100px;
+}
+
+.history-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.item-card {
+    width: 200px;
+    text-align: left;
+    padding: 50px;
+}
+
+.item-card-inner{
+    text-decoration: none;
+}
+
+.item-card-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #333;
+}

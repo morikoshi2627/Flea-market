@@ -6,36 +6,66 @@
 
 @section('content')
 <div class="main-inner">
-    <h2>プロフィール</h2>
 
-    <div class="profile-info">
-        <img src="{{ asset('storage/item_images/' . ($user->profile_image ?? 'default.png')) }}"
-            alt="プロフィール画像" width="100" onerror="this.src='{{ asset('storage/item_images/default.png') }}'">
-        <p><strong>名前：</strong>{{ $user->name }}</p>
-        <p><strong>郵便番号：</strong>{{ $user->postal_code }}</p>
-        <p><strong>住所：</strong>{{ $user->address }}</p>
-        <p><strong>建物名：</strong>{{ $user->building }}</p>
+    <div class="profile-inner">
+        <div class="profile-info">
+            <img class="profile-img" src="{{ asset('storage/item_images/' . ($user->profile_image ?? 'default.png')) }}"
+                alt="プロフィール画像" width="100" onerror="this.src='{{ asset('storage/item_images/default.png') }}'">
+
+            <p class="user-name">
+                <strong class="user-name-strong">ユーザー名</strong>{{ $user->name }}</p>
+
+        </div>
+
+
+        <div class="profile-edit">
+            <a href="{{ route('profile.edit') }}" class="edit-button">プロフィールを編集</a>
+        </div>
     </div>
 
-    <a href="{{ route('profile.edit') }}">プロフィールを編集</a>
 
+    <div class="history-wrapper">
 
-    <hr>
+        <!-- タイトル -->
+        <div class="history-header">
+            <a href="{{ route('mypage', ['page' => 'sell']) }}" class="history-title {{ request('page') === 'sell' ? 'active' : '' }}">
+                出品した商品
+            </a>
+            <a href="{{ route('mypage', ['page' => 'buy']) }}" class="history-title {{ request('page') === 'buy' ? 'active' : '' }}">
+                購入した商品
+            </a>
+        </div>
+        <hr>
 
-    <h3>購入した商品一覧</h3>
-    <ul>
-        @foreach ($buyItems as $item)
-        <li>{{ $item->item->name ?? '商品なし' }}</li>
-        @endforeach
-        <a href="{{ route('mypage', ['page' => 'buy']) }}">購入履歴</a>
-    </ul>
+        <!-- 出品商品一覧 -->
+        @if (request('page') === 'sell')
+        <div class="history-grid">
+            @foreach ($sellItems as $item)
+            <div class="item-card">
+                <a class="item-card-inner" href="{{ route('items.show', $item->id) }}">
+                    <img class="item-card-img" src="{{ asset('storage/item_images/' . $item->image) }}" alt="{{ $item->name }}">
+                    <p class="item-name">{{ $item->name }}</p>
+                </a>
+            </div>
+            @endforeach
+        </div>
 
-    <h3>出品した商品一覧</h3>
-    <ul>
-        @foreach ($sellItems as $item)
-        <li>{{ $item->name }}</li>
-        @endforeach
-        <a href="{{ route('mypage', ['page' => 'sell']) }}">出品履歴</a>
-    </ul>
+        <!-- 購入商品一覧 -->
+        @elseif (request('page') === 'buy')
+        <div class="history-grid">
+            @foreach ($buyItems as $item)
+            @if($item->item)
+            <div class="item-card">
+                <a class="item-card-inner" href="{{ route('items.show', $item->item->id) }}">
+                    <img class="item-card-img" src="{{ asset('storage/item_images/' . $item->item->image) }}" alt="{{ $item->item->name }}">
+                    <p class="item-name">{{ $item->item->name }}</p>
+                </a>
+            </div>
+            @endif
+            @endforeach
+        </div>
+        @endif
+
+    </div>
 </div>
 @endsection

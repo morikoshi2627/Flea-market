@@ -9,7 +9,7 @@
     padding: 20px;
 }
 
-.main-title{
+.main-title {
     text-align: center;
     padding: 30px;
     font-size: 30px;
@@ -52,7 +52,7 @@
     text-align: center;
 }
 
-.register-button{
+.register-button {
     width: 100%;
     background: #ff5655;
     border: none;
@@ -62,12 +62,12 @@
     cursor: pointer;
 }
 
-.login-link{
+.login-link {
     text-align: center;
     margin-top: 30px;
 }
 
-.login-button{
+.login-button {
     color: #2d99ff;
     font-size: 20px;
     cursor: pointer;

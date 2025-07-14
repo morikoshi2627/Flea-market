@@ -50,6 +50,7 @@
   cursor: pointer;
 }
 
+.login-button,
 .logout-button {
   margin-left: 12px;
   margin-top: 10px;

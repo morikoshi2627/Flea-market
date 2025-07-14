@@ -33,8 +33,14 @@ class ProfileController extends Controller
 
     public function edit()
     {
-        $user = Auth::user();
-        return view('users.setting', compact('user'));
+        $user = auth()->user();
+
+        // すでに登録済みなら一覧へ
+        if ($user->is_profile_initialized) {
+            return redirect('/');
+        }
+
+        return view('users.setting', compact('user')); // プロフィール編集画面
     }
 
     public function update(ProfileRequest $request)
@@ -56,8 +62,21 @@ class ProfileController extends Controller
         $user->postal_code = $request->postal_code;
         $user->address = $request->address;
         $user->building = $request->building;
+
+
+        // 画像がアップロードされている場合
+        if ($request->hasFile('profile_image')) {
+            $filename = $request->file('profile_image')->store('item_images', 'public');
+            $user->profile_image = $filename;
+        }
+
+        // プロフィールを初めて完了したときのみ true にする（再編集でも変更しない）
+        if (! $user->profile_completed) {
+            $user->profile_completed = true;
+        }
+
         $user->save();
 
-        return redirect()->route('mypage')->with('success', 'プロフィールを更新しました');
+        return redirect()->route('mypage');
     }
 }

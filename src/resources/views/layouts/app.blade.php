@@ -26,12 +26,20 @@
 
             <!-- 各種ボタン -->
             <div class="header-right">
+                @auth
                 <form class="form-actions" method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="logout-button" type="submit">ログアウト</button>
                 </form>
                 <a class="mypage-button" href="{{ route('mypage') }}">マイページ</a>
                 <a class="listing-button" href="{{ route('items.create') }}">出品</a>
+                @endauth
+
+                @guest
+                <a class="login-button" href="{{ route('login') }}">ログイン</a>
+                <a class="mypage-button" href="{{ route('mypage') }}">マイページ</a>
+                <a class="listing-button" href="{{ route('items.create') }}">出品</a>
+                @endguest
             </div>
         </div>
     </header>
