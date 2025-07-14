@@ -1,66 +1,49 @@
-<!DOCTYPE html>
-<html lang="ja">
+@extends('layouts.auth')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flea-market</title>
-    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/login.css') }}" />
+@endsection
 
-</head>
+@section('content')
+<div class="main-inner">
 
-<body>
-    <header class="header">
-        <div class="header-inner">
-            <img src="{{ asset('storage/item_images/logo.svg') }}" alt="coachtechロゴ">
-        </div>
-    </header>
+    <!-- タイトル -->
+    <h2 class="main-title">ログイン</h2>
 
-    <main class="main-content">
-        <div class="main-inner">
+    <form class="login-form" method="POST" action="{{ route('login') }}" novalidate>
+        @csrf
 
-            <!-- タイトル -->
-            <h2 class="main-title">ログイン</h2>
-
-            <form class="login-form" method="POST" action="{{ route('login') }}" novalidate>
-                @csrf
-
-                <div class="input-area">
-                    <div class="form-group">
-                        <label class="form-label" for="email">メールアドレス</label>
-                        <input class="form-input" type="email" name="email" value="{{ old('email') }}" required>
-                        @error('email')
-                        <div class="form-error">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="password">パスワード</label>
-                        <input class="form-input" type="password" name="password" required>
-                        @error('password')
-                        <div class="form-error">
-                            {{ $message }}
-                        </div>
-                        @enderror
-                    </div>
-
-                    <div class="form-actions">
-                        <button class="login-button" type="submit">ログインする
-                        </button>
-                    </div>
+        <div class="input-area">
+            <div class="form-group">
+                <label class="form-label" for="email">メールアドレス</label>
+                <input class="form-input" type="email" name="email" value="{{ old('email') }}" required>
+                @error('email')
+                <div class="form-error">
+                    {{ $message }}
                 </div>
-            </form>
+                @enderror
+            </div>
 
-            <!-- アカウント作成リンク -->
-            <div class="login-link">
-                <a class="register-button" href="{{ route('register') }}">会員登録はこちら</a>
+            <div class="form-group">
+                <label class="form-label" for="password">パスワード</label>
+                <input class="form-input" type="password" name="password" required>
+                @error('password')
+                <div class="form-error">
+                    {{ $message }}
+                </div>
+                @enderror
+            </div>
+
+            <div class="form-actions">
+                <button class="login-button" type="submit">ログインする
+                </button>
             </div>
         </div>
-    </main>
-</body>
+    </form>
 
-</html>
+    <!-- アカウント作成リンク -->
+    <div class="login-link">
+        <a class="register-button" href="{{ route('register') }}">会員登録はこちら</a>
+    </div>
+</div>
+@endsection

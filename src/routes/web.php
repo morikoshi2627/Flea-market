@@ -16,6 +16,8 @@ use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,21 +41,33 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 
 // メール認証画面
 Route::get('/email/verify', function () {
-  return view('auth.verify-email');
+    $user = Auth::user();
+
+    if (!$user) {
+        abort(403, 'Unauthorized');
+    }
+
+    $verifyUrl = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addMinutes(60),
+        ['id' => $user->id, 'hash' => sha1($user->email)]
+    );
+
+    return view('auth.verify-email', compact('verifyUrl'));
 })->middleware('auth')->name('verification.notice');
 
 // メール認証処理
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-  $request->fulfill(); // 認証完了
+    $request->fulfill(); // 認証完了
 
-  return redirect('/mypage/profile'); // 認証完了後のリダイレクト先
+    return redirect('/mypage/profile'); // 認証完了後のリダイレクト先
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-  // 認証メール再送
-  Route::post('/email/verification-notification', function (Request $request) {
-  $request->user()->sendEmailVerificationNotification();
+// 認証メール再送
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
 
-  return back()->with('status', 'verification-link-sent');
+    return back()->with('status', 'verification-link-sent');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
@@ -82,7 +96,7 @@ Route::post('/sell', [ItemController::class, 'store'])->middleware(['auth', 'ver
 Route::get('/mypage', [ProfileController::class, 'show'])->middleware(['auth', 'verified'])->name('mypage');
 
 // プロフィール編集
-Route::get('/mypage/profile', [ProfileController::class, 'edit'])->middleware(['auth'])->name('profile.edit');
+Route::get('/mypage/profile', [ProfileController::class, 'edit'])->middleware(['auth', 'verified'])->name('profile.edit');
 
 // プロフィール更新
 Route::post('/mypage/profile', [ProfileController::class, 'update'])->middleware(['auth', 'verified'])->name('profile.update');
@@ -92,8 +106,3 @@ Route::get('/mypage/purchased', [PurchaseController::class, 'index'])->middlewar
 
 // プロフィール画面_出品した商品一覧（`mypage?page=sell`）
 Route::get('/mypage/listed', [ItemController::class, 'myListings'])->middleware(['auth', 'verified'])->name('mypage.listed');
-
-// 認証未完了時のアクセス制御と誘導画面表示
-Route::middleware(['auth', 'verified'])->group(function () {
-  Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-});

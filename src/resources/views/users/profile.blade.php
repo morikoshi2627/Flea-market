@@ -13,7 +13,8 @@
                 alt="プロフィール画像" width="100" onerror="this.src='{{ asset('storage/item_images/default.png') }}'">
 
             <p class="user-name">
-                <strong class="user-name-strong">ユーザー名</strong>{{ $user->name }}</p>
+                <strong class="user-name-strong">ユーザー名</strong>{{ $user->name }}
+            </p>
 
         </div>
 

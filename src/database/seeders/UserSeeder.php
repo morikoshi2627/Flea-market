@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class UserSeeder extends Seeder
 {
@@ -24,6 +26,9 @@ class UserSeeder extends Seeder
             'postal_code' => '123-4567',
             'address' => '東京都千代田区1-1-1',
             'building' => 'フリマビル101',
+            'email_verified_at' => Carbon::now(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         // 出品次郎
@@ -36,6 +41,9 @@ class UserSeeder extends Seeder
                 'postal_code' => '987-6543',
                 'address' => '大阪府大阪市2-2-2',
                 'building' => 'マーケットビル202',
+                'email_verified_at' => Carbon::now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         );
     }

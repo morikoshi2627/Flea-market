@@ -47,7 +47,6 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-
         if (!$user) {
             abort(403, 'ユーザーが認証されていません');
         }
@@ -77,6 +76,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('mypage');
+        return redirect()->route('items.index');
     }
 }
