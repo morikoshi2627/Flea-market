@@ -1,4 +1,4 @@
-.main-inner{
+.main-inner {
     text-align: center;
     font-size: 20px;
     max-width: 600px;
@@ -33,7 +33,27 @@
     font-size: 16px;
 }
 
-.button-edit{
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.custom-file-label {
+    display: inline-block;
+    color: #ff5655;
+    border: 2px solid #ff5655;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 40px
+}
+
+.button-edit {
     width: 100%;
     box-sizing: border-box;
     background: #ff5655;
@@ -48,7 +68,8 @@
 .form-error {
     color: red;
     font-size: 14px;
-    margin-top: 4px; }
+    margin-top: 4px;
+}
 
 *,
 *::before,

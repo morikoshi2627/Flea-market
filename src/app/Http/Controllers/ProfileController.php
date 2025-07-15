@@ -64,20 +64,21 @@ class ProfileController extends Controller
         $user->address = $request->address;
         $user->building = $request->building;
 
+        // 初回プロフィール登録かどうかチェック
+        $isFirstTime = ! $user->profile_completed;
 
-        // 画像がアップロードされている場合
-        // if ($request->hasFile('profile_image')) {
-        //     $filename = $request->file('profile_image')->store('item_images', 'public');
-        //     $user->profile_image = $filename;
-        // }
-
-        // プロフィールを初めて完了したときのみ true にする（再編集でも変更しない）
-        if (! $user->profile_completed) {
+        // profile_completed フラグを true にする（初回のみ）
+        if ($isFirstTime) {
             $user->profile_completed = true;
         }
 
         $user->save();
 
-        return redirect()->route('items.index');
+        // 初回登録 → 商品一覧へ、それ以外はマイページへ
+        if ($isFirstTime) {
+            return redirect()->route('items.index'); // 商品一覧
+        } else {
+            return redirect()->route('mypage'); // マイページ
+        }
     }
 }

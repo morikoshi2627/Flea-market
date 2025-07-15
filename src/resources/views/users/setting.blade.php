@@ -23,7 +23,9 @@
                     onerror="this.src='{{ asset('storage/item_images/default.png') }}'">
             </div>
             <div>
-                <input class="profile-img-choice" type="file" name="profile_image">
+                <!-- カスタムボタン -->
+                <label for="profile_image" class="custom-file-label">画像を選択する</label>
+                <input id="profile_image" class="profile-img-choice" type="file" name="profile_image" style="display: none;">
                 @error('profile_image')
                 <div class="form-error">{{ $message }}</div>
                 @enderror

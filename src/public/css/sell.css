@@ -1,5 +1,153 @@
+.main-inner {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main-title-area {
+    text-align: center;
+    padding: 5px;
+    font-size: 20px;
+}
+
+/* 各入力ブロックの親div */
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+.hr {
+    margin-bottom: 30px;
+}
+
+.sub-title {
+    margin-top: 50px;
+    font-size: 24px;
+}
+
+/* ラベル（タイトル） */
+.title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* テキスト入力・セレクト・テキストエリア共通 */
+.content-input,
+.content-select,
+.content-textarea {
+    padding: 15px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+/* 画像選択ボタン */
+.custom-file {
+    position: relative;
+    display: inline-block;
+    border: 1px dotted #ccc;
+    padding: 40px;
+    text-align: center;
+}
+
+.custom-file-input {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #ff5655;
+    color: #ff5655;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* ボタン風チェックボックスの親：横並び＆折り返し */
+.category-button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+/* ボタン風チェックボックス */
+.category-button-span {
+    display: inline-block;
+    padding: 5px 16px;
+    color: #ff5655;
+    border: 1px solid #ff5655;
+    border-radius: 20px;
+    font-size: 14px;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* チェックボックス本体を非表示に */
+.category-input[type="checkbox"] {
+    display: none;
+}
+
+/* 選択状態のスタイル */
+.category-input[type="checkbox"]:checked+span {
+    background-color: #ff5655;
+    color: #fff;
+    border-color: #ff5655;
+}
+
+/* 販売価格 */
+.price-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.yen-mark {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: #555;
+    font-weight: bold;
+}
+
+.price-input {
+    padding-left: 30px;
+}
+
+/* 出品ボタン */
+.submit-button {
+    width: 100%;
+    background: #ff5655;
+    border: none;
+    color: white;
+    padding: 10px 0;
+    margin: 15px 0 50px 0;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 .form-error {
-  color: red;
-  font-size: 14px;
-  margin-top: 4px;
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.cartegory-error{
+    color: red;
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: normal;
 }
