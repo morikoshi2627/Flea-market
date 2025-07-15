@@ -16,6 +16,12 @@ class ItemController extends Controller
     {
         $query = Item::query();
 
+
+        // 自分が出品した商品を除外（ログイン時のみ）
+        if (Auth::check()) {
+            $query->where('user_id', '!=', Auth::id());
+        }
+
         // 商品名で部分一致検索
         if ($request->filled('keyword')) {
             $keyword = $request->keyword;
