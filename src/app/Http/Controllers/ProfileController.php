@@ -51,12 +51,14 @@ class ProfileController extends Controller
             abort(403, 'ユーザーが認証されていません');
         }
 
+        // プロフィール画像の処理
         if ($request->hasFile('profile_image')) {
             $path = $request->file('profile_image')->store('public/item_images');
             $filename = basename($path); // ← ファイル名だけ取り出す
             $user->profile_image = $filename; // ← ファイル名のみをDBに保存
         }
 
+        // 他の項目
         $user->name = $request->name;
         $user->postal_code = $request->postal_code;
         $user->address = $request->address;
@@ -64,10 +66,10 @@ class ProfileController extends Controller
 
 
         // 画像がアップロードされている場合
-        if ($request->hasFile('profile_image')) {
-            $filename = $request->file('profile_image')->store('item_images', 'public');
-            $user->profile_image = $filename;
-        }
+        // if ($request->hasFile('profile_image')) {
+        //     $filename = $request->file('profile_image')->store('item_images', 'public');
+        //     $user->profile_image = $filename;
+        // }
 
         // プロフィールを初めて完了したときのみ true にする（再編集でも変更しない）
         if (! $user->profile_completed) {

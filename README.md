@@ -19,6 +19,10 @@
   
 ※ シーディング後すぐログイン可能です。  
 
+### メール認証について  
+- 登録後、自動でメール認証画面に遷移します。  
+- MailHogを使って http://localhost:8025 でメールを確認してください。  
+
 ### Dockerビルド
 1. git clone https://github.com/morikoshi2627/Flea-market.git  
 2. cd Flea-market  

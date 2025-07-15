@@ -10,6 +10,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\VerifyEmailViewResponse;
 use Laravel\Fortify\Contracts\VerifyEmailResponse;
+use Laravel\Fortify\Contracts\RegisterResponse;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -68,6 +69,15 @@ class FortifyServiceProvider extends ServiceProvider
             
                      return Limit::perMinute(10)->by($email . $request->ip());
                  });
+
+        $this->app->singleton(RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($request)
+                {
+                    return redirect()->route('verification.notice'); // = /email/verify
+                }
+            };
+        });
 
         $this->app->instance(
             VerifyEmailViewResponse::class,
