@@ -24,6 +24,17 @@
             <p class="price-tax">（税込）</p>
         </div>
 
+        <!-- sold表示 -->
+        <div class="product-detail">
+
+            @if ($item->status === 'sold')
+            <span class="sold-label">SOLD</span>
+            @endif
+
+            <p>{{ $item->description }}</p>
+            <!-- 他の項目も表示 -->
+        </div>
+
         <div class="icon-stats">
             <!-- いいねアイコンと数 -->
             @auth

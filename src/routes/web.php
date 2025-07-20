@@ -85,8 +85,15 @@ Route::post('/item/{item}/favorite', [FavoriteController::class, 'toggle'])->mid
 Route::get('/purchase/{item}', [PurchaseController::class, 'create'])->middleware(['auth', 'verified'])->name('purchase.create');
 Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->middleware(['auth', 'verified'])->name('purchase.store');
 
-// 住所変更
-Route::post('/purchase/address/{item}', [PurchaseController::class, 'update'])->middleware(['auth', 'verified'])->name('purchase.address.update');
+// 住所変更画面へ（GET）
+Route::get('/purchase/address/{item}', [PurchaseController::class, 'editAddress'])
+    ->middleware(['auth', 'verified'])
+    ->name('purchase.address.edit');
+
+// 住所変更処理（POST or PUT）
+Route::post('/purchase/address/{item}', [PurchaseController::class, 'updateAddress'])
+    ->middleware(['auth', 'verified'])
+    ->name('purchase.address.update');
 
 // 商品出品
 Route::get('/sell', [ItemController::class, 'create'])->middleware(['auth', 'verified'])->name('items.create');

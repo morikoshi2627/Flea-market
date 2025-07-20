@@ -1,4 +1,4 @@
-.main-inner{
+.main-inner {
     max-width: 100%;
 }
 
@@ -31,7 +31,7 @@
     font-size: 18px;
 }
 
-.user-name-strong{
+.user-name-strong {
     margin-right: 30px;
 }
 
@@ -89,7 +89,7 @@
     padding: 50px;
 }
 
-.item-card-inner{
+.item-card-inner {
     text-decoration: none;
 }
 

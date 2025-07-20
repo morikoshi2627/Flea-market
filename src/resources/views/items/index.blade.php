@@ -8,7 +8,7 @@
 <div class="main-inner">
 
     <div class="link-area">
-        <!-- ルートは後で！！?? -->
+
         <a class="recommendation-button" href="{{ route('items.index') }}">おすすめ</a>
 
         <!-- マイリストに遷移するリンクに検索状態を引き継がせる -->
@@ -21,13 +21,16 @@
         <div class="item-card">
             <a class="item-name" href="{{ route('items.show', ['item' => $item->id]) }}">
                 <img class="goods-img" src="{{ asset('storage/item_images/' . $item->image) }}" alt="{{ $item->name }}">
-                <p>{{ $item->name }}</p>
+                <p>
+                    {{ $item->name }}
+                    @if ($item->status === 'sold')
+                    <span class="sold-label">SOLD</span>
+                    @endif
+                </p>
             </a>
         </div>
         @endforeach
     </div>
-
-
 
     <!-- ページネーション -->
     <div class="custom-pagination">

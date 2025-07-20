@@ -56,4 +56,10 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
+    // プロフィール画面に購入商品一覧を表示
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
 }

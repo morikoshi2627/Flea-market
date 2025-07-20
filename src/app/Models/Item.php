@@ -52,6 +52,8 @@ class Item extends Model
         'brand_id',
         'condition_id',
         'price',
+        'status',
+        'buyer_id',
     ];
 
 

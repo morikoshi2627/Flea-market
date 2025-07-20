@@ -46,7 +46,7 @@
 }
 
 /* 価格 */
-.price-area{
+.price-area {
     display: flex;
     align-items: baseline;
     margin: 0 auto;
@@ -60,6 +60,13 @@
 }
 .price-tax {
     font-size: 20px;
+}
+
+/* sold表示 */
+.sold-label {
+    color: red;
+    font-weight: bold;
+    font-size: 25px;
 }
 
 /* いいね、コメントアイコン */

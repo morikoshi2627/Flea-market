@@ -11,11 +11,9 @@
         <div class="profile-info">
             <img class="profile-img" src="{{ asset('storage/item_images/' . ($user->profile_image ?? 'default.png')) }}"
                 alt="プロフィール画像" width="100" onerror="this.src='{{ asset('storage/item_images/default.png') }}'">
-
             <p class="user-name">
                 <strong class="user-name-strong">ユーザー名</strong>{{ $user->name }}
             </p>
-
         </div>
 
 
@@ -55,18 +53,15 @@
         @elseif (request('page') === 'buy')
         <div class="history-grid">
             @foreach ($buyItems as $item)
-            @if($item->item)
             <div class="item-card">
-                <a class="item-card-inner" href="{{ route('items.show', $item->item->id) }}">
-                    <img class="item-card-img" src="{{ asset('storage/item_images/' . $item->item->image) }}" alt="{{ $item->item->name }}">
-                    <p class="item-name">{{ $item->item->name }}</p>
+                <a class="item-card-inner" href="{{ route('items.show', $item->id) }}">
+                    <img class="item-card-img" src="{{ asset('storage/item_images/' . $item->image) }}" alt="{{ $item->name }}">
+                    <p class="item-name">{{ $item->name }}</p>
                 </a>
             </div>
-            @endif
             @endforeach
         </div>
         @endif
-
     </div>
 </div>
 @endsection

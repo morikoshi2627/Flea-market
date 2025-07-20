@@ -13,6 +13,7 @@ class ProfileController extends Controller
 {
     public function show(Request $request)
     {
+
         $user = Auth::user();
 
         $buyItems = collect();
@@ -20,7 +21,7 @@ class ProfileController extends Controller
 
         // ?page=buy の場合は購入履歴を取得
         if ($request->input('page') === 'buy') {
-            $buyItems = \App\Models\Purchase::where('user_id', $user->id)->with('item')->latest()->get();
+            $buyItems =  Item::where('buyer_id', $user->id)->latest()->get();
         }
 
         // ?page=sell の場合は出品商品を取得
