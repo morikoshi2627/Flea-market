@@ -9,7 +9,7 @@
     <div class="content">
         <h2 class="content-title">住所の変更</h2>
 
-        <form class="form-edit" action="{{ route('purchase.address.update', $item->id) }}" method="POST">
+        <form class="form-edit" action="{{ route('purchase.address.update', $item->id) }}" method="POST" novalidate>
             @csrf
 
             <div class="form-group">

@@ -15,7 +15,7 @@
     <p class="success">{{ session('success') }}</p>
     @endif
 
-    <form class="form-content" action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
+    <form class="form-content" action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data" novalidate>
         @csrf
 
         <!--  商品画像  -->

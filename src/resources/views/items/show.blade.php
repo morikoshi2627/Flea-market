@@ -31,7 +31,6 @@
             <span class="sold-label">SOLD</span>
             @endif
 
-            <p>{{ $item->description }}</p>
             <!-- 他の項目も表示 -->
         </div>
 
@@ -51,7 +50,7 @@
                 <img class="icon-img" src="{{ asset('storage/item_images/star.png') }}?v={{ time() }}" alt="いいね">
                 <span class="icon-button-span">{{ $item->favorites->count() }}</span>
             </div>
-            <p><a href="{{ route('login') }}">ログイン</a>すると「いいね」できます。</p>
+            <p><a class="login-tag" href="{{ route('login') }}">ログイン</a>すると「いいね」できます。</p>
             @endauth
 
             <!-- コメントアイコンと数 -->
@@ -124,7 +123,7 @@
             <button class="button-submit" type="submit">コメントを送信する</button>
         </form>
         @else
-        <p><a href="{{ route('login') }}">ログイン</a>するとコメントを投稿できます。</p>
+        <p><a class="login-tag" href="{{ route('login') }}">ログイン</a>するとコメントを投稿できます。</p>
         @endif
     </div>
 </div>

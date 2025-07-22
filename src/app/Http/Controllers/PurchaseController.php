@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Auth;
@@ -17,10 +16,7 @@ class PurchaseController extends Controller
         return view('items.purchase', compact('item'));
     }
 
-    // public function store(PurchaseRequest $request, $itemId)
-    // {
-
-    public function store(Request $request, $itemId)
+    public function store(PurchaseRequest $request, $itemId)
     {
 
         $item = Item::findOrFail($itemId);
@@ -30,15 +26,14 @@ class PurchaseController extends Controller
             return redirect()->back()->with('error', 'この商品はすでに購入されています。');
         }
 
-        // 購入処理（purchasesテーブルへの登録）
+        // 購入処理（バリデーション済みなので $request->validated() を使う）
         Purchase::create([
             'user_id'        => Auth::id(),
             'item_id'        => $item->id,
-            'payment_method' => $request->input('payment_method'),
-            'postal_code'    => $request->input('postal_code'),
-            'address'        => $request->input('address'),
-            'building'       => $request->input('building'),
-
+            'payment_method' => $request->validated()['payment_method'],
+            'postal_code'    => $request->validated()['postal_code'],
+            'address'        => $request->validated()['address'],
+            'building'       => $request->validated()['building'],
         ]);
 
         // 商品のbuyer_idを更新してSOLD状態にする

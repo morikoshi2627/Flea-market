@@ -26,7 +26,9 @@ class AddStatusToItemsTable extends Migration
     public function down()
     {
         Schema::table('items', function (Blueprint $table) {
-            //
+            if (Schema::hasColumn('items', 'status')) {
+                $table->dropColumn('status');
+            }
         });
     }
 }

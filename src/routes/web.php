@@ -9,11 +9,7 @@ use App\Http\Controllers\CommentController;
 
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-use Laravel\Fortify\Http\Controllers\EmailVerificationNotificationController;
 
-use Laravel\Fortify\Http\Controllers\VerifyEmailController;
-use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
-use Laravel\Fortify\Http\Controllers\NewPasswordController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
