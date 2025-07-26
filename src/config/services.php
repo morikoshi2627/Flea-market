@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'stripe' => [
+        'key' => env('STRIPE_KEY'), // フロント側などで公開キーとして使用
+        'secret' => env('STRIPE_SECRET'), // サーバー側で支払い作成などに使用
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'), // Webhook署名検証用
+    ],
+
 ];

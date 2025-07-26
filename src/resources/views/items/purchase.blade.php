@@ -7,7 +7,7 @@
 @section('content')
 <div class="main-inner">
 
-    <form action="{{ route('purchase.store', $item->id) }}" method="POST" novalidate>
+    <form action="{{ route('checkout', $item->id) }}" method="POST" novalidate>
         @csrf
 
         <input type="hidden" name="postal_code" value="{{ Auth::user()->postal_code }}">

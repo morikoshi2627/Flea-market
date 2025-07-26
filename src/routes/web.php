@@ -6,6 +6,8 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\StripeCheckoutController;
+use App\Http\Controllers\StripeWebhookController;
 
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
@@ -80,6 +82,16 @@ Route::post('/item/{item}/favorite', [FavoriteController::class, 'toggle'])->mid
 // 商品購入
 Route::get('/purchase/{item}', [PurchaseController::class, 'create'])->middleware(['auth', 'verified'])->name('purchase.create');
 Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->middleware(['auth', 'verified'])->name('purchase.store');
+
+// Checkout セッション作成(Stripe)
+Route::post('/checkout/{item}', [StripeCheckoutController::class, 'checkout'])->name('checkout');
+
+// 成功・キャンセル時の遷移先
+Route::get('/checkout/success', [StripeCheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [StripeCheckoutController::class, 'cancel'])->name('checkout.cancel');
+
+//  Webhook の設定（決済完了処理）
+Route::post('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
 
 // 住所変更画面へ（GET）
 Route::get('/purchase/address/{item}', [PurchaseController::class, 'editAddress'])
