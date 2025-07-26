@@ -16,6 +16,7 @@ class Purchase extends Model
         'postal_code',
         'address',
         'building',
+        'payment_id'
     ];
 
     public function item()

@@ -56,6 +56,31 @@
 
 6. php artisan migrate --seed  
  
+### Stripe 決済連携 & Webhook 受信設定
+本アプリでは、商品購入時に Stripe Checkout を利用したクレジットカード/コンビニ決済が可能です。
+
+1. 環境変数の設定  
+.env ファイルに以下を追加してください  
+
+STRIPE_KEY=pk_test_XXXXXXXXXXXXXXXXXXXXXXXX
+STRIPE_SECRET=sk_test_XXXXXXXXXXXXXXXXXXXXXXXX
+STRIPE_WEBHOOK_SECRET=whsec_XXXXXXXXXXXXXXXXXXXXXXXX
+
+2.  Stripe CLI の導入（Webhook受信用）  
+StripeからのWebhookイベント（決済完了通知など）をローカルで受信するには、Stripe CLI を導入してください。  
+
+- Stripe CLI インストール（Homebrewの場合）  
+brew install stripe/stripe-cli/stripe  
+
+- Webhookをローカルに転送  
+stripe listen --forward-to localhost:80/webhook/stripe  
+
+3. 決済フローの概要  
+- ユーザーが `/purchase/{item_id}` で商品を購入  
+- `StripeCheckoutController@checkout` がStripeセッションを作成  
+- 決済後、StripeがWebhook経由で `/webhook/stripe` に通知  
+- `StripeWebhookController` がイベントを受信し、DBに購入情報を保存  
+
 ### 開発環境
 - 商品一覧画面（トップ画面）: http://localhost/  
 - 会員登録画面： http://localhost/register/    

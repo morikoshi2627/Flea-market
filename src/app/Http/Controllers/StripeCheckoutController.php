@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Item;
-use App\Models\Purchase;
 
 class StripeCheckoutController extends Controller
 {

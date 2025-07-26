@@ -14,6 +14,7 @@ class AddUniqueToPaymentIdOnPurchases extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
+            $table->string('payment_id')->nullable(false)->change();
             $table->unique('payment_id');
         });
     }
@@ -27,6 +28,7 @@ class AddUniqueToPaymentIdOnPurchases extends Migration
     {
         Schema::table('purchases', function (Blueprint $table) {
             $table->dropUnique(['payment_id']);
+            $table->string('payment_id')->nullable()->change();
         });
     }
 }
