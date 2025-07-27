@@ -26,3 +26,4 @@ class Comment extends Model
     ];
 
 }
+

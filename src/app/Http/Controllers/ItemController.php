@@ -6,42 +6,50 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Http\Requests\ExhibitionRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use App\Models\ItemCategory;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ItemController extends Controller
 {
-    // 商品一覧画面（トップ）
+
     public function index(Request $request)
     {
-        $query = Item::query();
+        $tab = $request->input('tab');
+        $keyword = $request->input('keyword');
 
+        // デフォルト: ログインしていれば出品除外
+        $itemQuery = Item::query();
 
-        // 自分が出品した商品を除外（ログイン時のみ）
         if (Auth::check()) {
-            $query->where('user_id', '!=', Auth::id());
+            $itemQuery->where('user_id', '!=', Auth::id());
         }
 
-        // 商品名で部分一致検索
-        if ($request->filled('keyword')) {
-            $keyword = $request->keyword;
-            $query->where('name', 'like', '%' . $keyword . '%');
+        if ($keyword) {
+            $itemQuery->where('name', 'like', '%' . $keyword . '%');
         }
 
-        // 「マイリスト」タブ（いいね一覧）
-        if ($request->input('tab') === 'mylist') {
-            if (!auth()->check()) {
-                return redirect()->route('login')->with('error', 'ログインしてください');
+        if ($tab === 'mylist') {
+            if (!Auth::check()) {
+                // 空のPaginatorを用意
+                $items = new LengthAwarePaginator([], 0, 10, 1, [
+                    'path' => $request->url(),
+                    'query' => $request->query(),
+                ]);
+            } else {
+                $user = Auth::user();
+
+                $favoriteQuery = $user->favorites();
+                if (!empty($keyword)) {
+                    $favoriteQuery->where('name', 'like', '%' . $keyword . '%');
+                }
+
+                $items = $favoriteQuery->latest()->paginate(10)->appends($request->all());
             }
-
-            $user = auth()->user();
-            $query->whereHas('favorites', function ($q) use ($user) {
-                $q->where('user_id', $user->id);
-            });
+        } else {
+            $items = $itemQuery->latest()->paginate(10)->appends($request->all());
         }
-        $items = $query->latest()->paginate(10)->appends($request->all());
-
         return view('items.index', compact('items'));
+        
     }
 
     // 商品詳細画面
