@@ -27,10 +27,10 @@ class StripeWebhookController extends Controller
                 $sig_header,
                 $endpoint_secret
             );
-        } catch (\UnexpectedValueException $e) {
+        } catch (\UnexpectedValueException $_) {
             // 無効なペイロード
             return response('Invalid payload', 400);
-        } catch (\Stripe\Exception\SignatureVerificationException $e) {
+        } catch (\Stripe\Exception\SignatureVerificationException $_) {
             // 無効な署名
             return response('Invalid signature', 400);
         }
@@ -56,9 +56,6 @@ class StripeWebhookController extends Controller
             $item->status = 'sold';
             $item->buyer_id = $user_id;
             $item->save();
-
-            // 配送先情報などは $session->customer_details などから取得可
-            $shipping = $session->shipping ?? [];
 
             // 支払い方法を取得
             $payment_method_type = $session->payment_method_types[0]
