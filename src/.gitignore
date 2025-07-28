@@ -13,3 +13,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+docker/mysql/data/
+# allow tracking of dummy item images
+!storage/app/public/
+!storage/app/public/item_images/
+!storage/app/public/item_images/*
