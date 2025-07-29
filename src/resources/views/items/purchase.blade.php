@@ -54,7 +54,7 @@
                             <p>
                                 {{ Auth::user()->postal_code ?? '未登録' }}
                             </p>
-                            <p>{{ Auth::user()->address ?? '未登録' }}{{ Auth::user()->building ?? '未登録' }}
+                            <p>{{ Auth::user()->address ?? '未登録' }}{{ Auth::user()->building ?? '' }}
                             </p>
                         </div>
 
