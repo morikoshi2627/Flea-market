@@ -11,11 +11,13 @@ class RenameZipcodeToPostalCodeInPurchasesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('purchases', function (Blueprint $table) {
-            $table->renameColumn('zipcode', 'postal_code');
-        });
+        if (Schema::hasColumn('purchases', 'zipcode')) {
+            Schema::table('purchases', function (Blueprint $table) {
+                $table->renameColumn('zipcode', 'postal_code');
+            });
+        }
     }
 
     /**
@@ -25,7 +27,7 @@ class RenameZipcodeToPostalCodeInPurchasesTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('purchase', function (Blueprint $table) {
+        Schema::table('purchases', function (Blueprint $table) {
             $table->renameColumn('postal_code', 'zipcode');
         });
     }
