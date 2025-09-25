@@ -33,21 +33,11 @@
 
 /* 検索フィールド */
 .search-input {
-  padding: 6px 80px;
+  padding: 10px 40px;
+  width: 500px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 15px;
-}
-
-/* 検索ボタン */
-.search-button {
-  padding: 6px 12px;
-  background-color: #000;
-  color: white;
-  font-size: 15px;
-  border: 1px solid #ffffff;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .login-button,

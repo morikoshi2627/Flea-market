@@ -110,13 +110,14 @@
     cursor: pointer;
     margin-top: 30px;
     transition: background-color 0.3s;
-    box-sizing: border-box;/
+    box-sizing: border-box;
+    border-radius: 3px;
 }
 
 /* 商品説明 商品情報 */
 .item-version-title {
     margin-top: 40px;
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 0;
 }
 
@@ -140,7 +141,7 @@
 .item-2 {
     display: flex;
     align-items: baseline;
-    margin-bottom: 30px;
+    margin-top: 25px;
 }
 
 .category-tags {
@@ -162,11 +163,60 @@
     font-size: 20px;
 }
 
+.comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-item {
+    display: flex;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+.comment-user-and-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.comment-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.comment-name {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-post {
+    width: 100%;
+}
+
+.comment-text {
+    margin: 0;
+    padding: 8px 12px;
+    background-color: #e5e5e5;
+    border-radius: 5px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* コメント投稿フォーム */
 .comment-form {
     margin-bottom: 10px;
 }
 
 .comment-area {
+    padding: 10px;
     font-size: 15px;
     width: 100%;
     height: 100px;

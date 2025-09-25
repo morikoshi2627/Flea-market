@@ -8,11 +8,15 @@
 <div class="main-inner">
 
     <div class="link-area">
+        <a class="recommendation-button {{ request('tab') !== 'mylist' ? 'active' : '' }}"
+            href="{{ route('items.index') }}">
+            おすすめ
+        </a>
 
-        <a class="recommendation-button" href="{{ route('items.index') }}">おすすめ</a>
-
-        <!-- マイリストに遷移するリンクに検索状態を引き継がせる -->
-        <a class="mylist-button" href="{{ route('items.index', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}">マイリスト</a>
+        <a class="mylist-button {{ request('tab') === 'mylist' ? 'active' : '' }}"
+            href="{{ route('items.index', ['tab' => 'mylist', 'keyword' => request('keyword')]) }}">
+            マイリスト
+        </a>
     </div>
 
     <!-- 商品詳細ページへの遷移 -->

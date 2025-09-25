@@ -69,10 +69,6 @@
 
         <!-- 商品情報 -->
         <h3 class="item-version-title">商品の情報</h3>
-        <div class="item-1">
-            <p class="item-version2">商品の状態</p>
-            <p class="item-information">{{ $item->condition->name }}</p>
-        </div>
         <div class="item-2">
             <p class="item-version2">カテゴリー</p>
             <div class="category-tags">
@@ -84,18 +80,28 @@
             </div>
         </div>
 
+        <div class="item-1">
+            <p class="item-version2">商品の状態</p>
+            <p class="item-information">{{ $item->condition->name }}</p>
+        </div>
+
         <!-- コメント一覧表示 -->
         <h3 class="comment-title">コメント（{{ $item->comments->count() }}件）</h3>
         @if ($item->comments->isEmpty())
         <p>コメントはまだありません。</p>
         @else
-        <ul>
+        <ul class="comment-list">
             @foreach ($item->comments as $comment)
-            <li>
-                <strong>{{ $comment->user->name }}さん：</strong>
-                {{ $comment->content }}
-                <br>
-                <small>{{ $comment->created_at->format('Y年m月d日 H:i') }}</small>
+            <li class="comment-item">
+                <div class="comment-user-and-name">
+                    <img class="comment-avatar"
+                        src="{{ asset('storage/item_images/' . ($comment->user->profile_image ?? 'default.png')) }}"
+                        alt="{{ $comment->user->name }}のプロフィール画像">
+                    <p class="comment-name">{{ $comment->user->name }}さん</p>
+                </div>
+                <div class="comment-post">
+                    <p class="comment-text">{{ $comment->content }}</p>
+                </div>
             </li>
             @endforeach
         </ul>

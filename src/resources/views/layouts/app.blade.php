@@ -20,7 +20,6 @@
             <div class="header-search">
                 <form class="search-form" action="{{ route('items.index') }}" method="GET">
                     <input class="search-input" type="text" name="keyword" value="{{ request('keyword') }}" placeholder="なにをお探しですか？">
-                    <button class="search-button" type="submit">検索</button>
                 </form>
             </div>
 
