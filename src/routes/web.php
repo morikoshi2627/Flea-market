@@ -79,9 +79,11 @@ Route::post('/item/{item}/comment', [CommentController::class, 'store'])->middle
 // いいね/解除
 Route::post('/item/{item}/favorite', [FavoriteController::class, 'toggle'])->middleware(['auth', 'verified'])->name('favorites.toggle');
 
-// 商品購入
+// 購入画面表示
 Route::get('/purchase/{item}', [PurchaseController::class, 'create'])->middleware(['auth', 'verified'])->name('purchase.create');
+// 実際の購入処理（POST）
 Route::post('/purchase/{item}', [PurchaseController::class, 'store'])->middleware(['auth', 'verified'])->name('purchase.store');
+Route::post('/purchase/{item}/select', [PurchaseController::class, 'select'])->middleware(['auth', 'verified'])->name('purchase.select');
 
 // Checkout セッション作成(Stripe)
 Route::post('/checkout/{item}', [StripeCheckoutController::class, 'checkout'])->name('checkout');

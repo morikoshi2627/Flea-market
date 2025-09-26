@@ -48,8 +48,49 @@
     margin-bottom: 20px;
 }
 
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 300px;
+    margin: 30px 0 0 60px;
+}
+
+.payment-select {
+    width: 100%;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid #737373;
+    background-color: #fff;
+    appearance: none;
+}
+
+/* 疑似要素で三角矢印を追加 */
+.custom-select::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    font-size: 12px;
+}
+
+.address-area {
+    margin: 25px 0 0 60px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.building-area {
+    margin: 10px 0 0 60px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 .sub-title {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: bold;
     margin-bottom: 8px;
 }
@@ -139,6 +180,7 @@
     border: none;
     cursor: pointer;
     margin-top: 30px;
+    border-radius: 3px;
 }
 
 .form-error {
