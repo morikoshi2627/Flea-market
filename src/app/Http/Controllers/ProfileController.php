@@ -52,7 +52,7 @@ class ProfileController extends Controller
 
         // プロフィール画像の処理
         if ($request->hasFile('profile_image')) {
-            $path = $request->file('profile_image')->store('public/item_images');
+            $path = $request->file('profile_image')->store('item_images', 'public');
             $filename = basename($path); // ← ファイル名だけ取り出す
             $user->profile_image = $filename; // ← ファイル名のみをDBに保存
         }

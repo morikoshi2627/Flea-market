@@ -8,6 +8,9 @@
 - 画像をブラウザからアクセスするために、`php artisan storage:link`コマンドを実行してから`php artisan migrate --seed`を実行してください。 
 
 ### テストユーザー（ダミーユーザー）情報  
+本アプリには、確認用の固定アカウントを用意しています。  
+以下のメールアドレスとパスワードでログインしてください。  
+
 1. 出品太郎（認証済み）  
 - メールアドレス：seller@example.com  
 - パスワード：password123  
@@ -16,11 +19,15 @@
 - メールアドレス：seller2@example.com  
 - パスワード：password456  
   
-※ シーディング後すぐログイン可能です。  
+※ 上記アカウントは、php artisan migrate:fresh --seed を実行した場合に再作成されます。パスワードは暗号化（ハッシュ化）されていますが、上記で記載した平文パスワードで即ログイン可能です。    
 
 ### メール認証について  
-- 登録後、自動でメール認証画面に遷移します。  
-- MailHogを使って http://localhost:8025 でメールを確認してください。  
+- 新規登録ユーザーはメール認証必須です。  
+- 上記固定ユーザー以外のダミーユーザーは通常どおり email_verified_at = null で作成されます。  
+- 新規登録後は、自動でメール認証画面に誘導され、認証完了後に勤怠画面に遷移します。  
+- メール送信の確認には MailHog というツールを使用しています。
+- MailHog は docker-compose で自動的に起動します。追加の設定や会員登録は不要です。  
+- DockerでMailHogを起動 (docker-compose up -d mailhog)した状態で、ブラウザから [http://localhost:8025](http://localhost:8025) にアクセスすると送信されたメールを確認できます。
 
 ### Dockerビルド
 1. git clone https://github.com/morikoshi2627/Flea-market.git  
@@ -102,6 +109,19 @@ stripe listen --forward-to localhost:80/webhook/stripe
   - Stripe Checkout API（クレジットカード/コンビニ支払い対応）  
   - Stripe CLI（Webhookイベントのローカル受信）  
   ※ StripeのAPIキーやWebhookシークレットキーは `.env` に個別設定してください。詳細は「Stripe 決済連携 & Webhook受信設定」セクションを参照。  
+
+### テストの実行方法
+本アプリケーションには、フィーチャテストを用意しています。  
+以下のコマンドで全テストを実行できます。  
+
+  `php artisan test`  
+
+テストケースには以下が含まれています：  
+- 会員登録・ログイン認証機能のテスト  
+- 商品一覧と詳細表示のテスト  
+- マイリスト一覧・商品検索機能・いいね機能・コメント送信機能のテスト   
+- 商品購入・支払い機能のテスト  
+- メール認証機能のテスト  
 
 ### ER図  
 ![ER図](public/images/Flea-market.png)  

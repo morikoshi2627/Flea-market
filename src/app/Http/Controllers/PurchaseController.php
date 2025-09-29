@@ -66,7 +66,11 @@ class PurchaseController extends Controller
     public function index()
     {
         $purchases = Purchase::where('user_id', Auth::id())->with('item')->latest()->get();
-        return view('purchases.index', compact('purchases'));
+        return view('users.profile', [
+            'buyItems' => $purchases->pluck('item'),
+            'user'     => Auth::user(),
+            'sellItems' => Auth::user()->items()->where('status', '!=', 'sold')->get(),
+        ]);
     }
 
 

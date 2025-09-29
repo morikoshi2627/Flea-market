@@ -78,16 +78,19 @@ class ItemController extends Controller
     {
         $user = Auth::user();
 
-        // 商品画像保存
-        $path = $request->file('image')->store('public/item_images');
-        $filename = basename($path);
+        if ($request->hasFile('image')) { // ファイルがあるかチェック
+            $path = $request->file('image')->store('item_images', 'public'); // publicディスクに保存
+            $imageName = basename($path); // ファイル名だけ取り出す
+        } else {
+            $imageName = null; // ファイルがない場合は null を設定
+        }
 
         // 商品保存
         $item = Item::create([
             'user_id' => $user->id,
             'name' => $request->name,
             'description' => $request->description,
-            'image' => $filename,
+            'image' => $imageName,
             'brand_id' => $request->brand_id,
             'condition_id' => $request->condition_id,
             'price' => $request->price,

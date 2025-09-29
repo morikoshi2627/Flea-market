@@ -16,7 +16,7 @@
         <div class="input-area">
             <div class="form-group">
                 <label class="form-label" for="name">ユーザー名</label>
-                <input class="form-input" type="email" name="name" value="{{ old('name') }}" required>
+                <input class="form-input" type="text" name="name" value="{{ old('name') }}" required>
                 @error('name')
                 <div class="form-error">
                     {{ $message }}

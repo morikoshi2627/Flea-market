@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'address' => '東京都千代田区1-1-1',
             'building' => 'フリマビル101',
             'email_verified_at' => Carbon::now(),
+            'profile_completed' => true,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -41,6 +42,7 @@ class UserSeeder extends Seeder
                 'address' => '大阪府大阪市2-2-2',
                 'building' => 'マーケットビル202',
                 'email_verified_at' => Carbon::now(),
+                'profile_completed' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
