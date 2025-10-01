@@ -85,6 +85,13 @@
                 <input type="hidden" name="postal_code" value="{{ Auth::user()->postal_code }}">
                 <input type="hidden" name="address" value="{{ Auth::user()->address }}">
                 <input type="hidden" name="building" value="{{ Auth::user()->building }}">
+
+                @error('payment_method')
+                <div class="form-error">
+                    {{ $message }}
+                </div>
+                @enderror
+
                 <button class="submit-button" type="submit">購入する</button>
             </form>
         </div>

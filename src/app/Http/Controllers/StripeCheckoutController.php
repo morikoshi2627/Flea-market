@@ -9,8 +9,10 @@ use App\Models\Item;
 
 class StripeCheckoutController extends Controller
 {
-    public function checkout(Request $request, Item $item)
+    public function checkout(\App\Http\Requests\PurchaseRequest $request, Item $item)
     {
+        $validated = $request->validated();
+
         Stripe::setApiKey(config('services.stripe.secret'));
 
         $session = Session::create([
@@ -33,10 +35,10 @@ class StripeCheckoutController extends Controller
             'metadata' => [
                 'user_id' => auth()->id(),
                 'item_id' => $item->id,
-                'postal_code' => auth()->user()->postal_code,
-                'address' => auth()->user()->address,
-                'building' => auth()->user()->building,
-                'payment_method' => $request->input('payment_method'),
+                'postal_code'  => $validated['postal_code'],
+                'address'      => $validated['address'],
+                'building'     => $validated['building'],
+                'payment_method' => $validated['payment_method'],
             ],
         ]);
 
