@@ -57,13 +57,13 @@ class StripeWebhookController extends Controller
             $item->buyer_id = $user_id;
             $item->save();
 
-            // 支払い方法を取得
-            $payment_method_type = $session->payment_method_types[0]
-                ?? $session->payment_method_type
-                ?? 'unknown';
+            // 支払い方法
+            $payment_method_type = $session->metadata->payment_method ?? 'unknown';
 
-            // 配送情報（shipping または customer_details を安全に参照）
-            $address = optional($session->customer_details)->address ?? optional($session->shipping)->address ?? null;
+            // 配送情報は metadata から取得
+            $postal_code = $session->metadata->postal_code ?? '';
+            $address = $session->metadata->address ?? '';
+            $building = $session->metadata->building ?? '';
 
             // 配送情報が取得できない場合、ログに出力して return してもよい
             if (!$address) {
@@ -79,14 +79,13 @@ class StripeWebhookController extends Controller
                 $paymentId = uniqid('pid_');
             }
 
-            // 購入情報を保存
             Purchase::create([
                 'user_id'        => $user_id,
                 'item_id'        => $item_id,
                 'payment_method' => $payment_method_type,
-                'postal_code'    => $address->postal_code ?? '',
-                'address'  => $address->line1 ?? '',
-                'building' => $address->line2 ?? '',
+                'postal_code'    => $postal_code,
+                'address'        => $address,
+                'building'       => $building,
                 'payment_id'     => $paymentId,
             ]);
 

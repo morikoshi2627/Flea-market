@@ -47,7 +47,7 @@ class StripeCheckoutController extends Controller
     public function success(Request $request)
     {
 
-        return redirect()->route('items.index')->with('success', '決済が完了しました');
+        return redirect()->route('items.index');
     }
 
     public function cancel()
