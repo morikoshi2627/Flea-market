@@ -42,7 +42,22 @@ class Item extends Model
     {
         return $this->hasMany(Comment::class); }
 
+    //　取引チャット 
+    public function transactionMessages()
+    {
+        return $this->hasMany(TransactionMessage::class);
+    }
 
+    public function buyer()
+    {
+        return $this->belongsTo(User::class, 'buyer_id');
+    }
+
+    // 評価
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
 
     protected $fillable = [
         'user_id',

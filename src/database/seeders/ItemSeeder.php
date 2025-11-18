@@ -31,10 +31,18 @@ class ItemSeeder extends Seeder
             ['name' => 'メイクセット', 'price' => 2500,  'brand' => null,       'condition' => '目立った傷や汚れなし', 'description' => '便利なメイクアップセット',     'image' => 'makeup-set.jpg'],
         ];
 
-        // 出品次郎のIDを取得
-        $userId = User::where('email', 'seller2@example.com')->value('id');
+        // 出品太郎と出品次郎のIDを取得
+        // 1〜5：出品太郎（seller@example.com）
+        $seller1 = User::where('email', 'seller@example.com')->value('id');
 
-        foreach ($items as $item) {
+        // 6〜10：出品次郎（seller2@example.com）
+        $seller2 = User::where('email', 'seller2@example.com')->value('id');
+
+        foreach ($items as $index => $item) {
+
+            // 1〜5 → seller1, 6〜10 → seller2
+            $userId = $index < 5 ? $seller1 : $seller2;
+
             $newItem = Item::create([
                 'name' => $item['name'],
                 'price' => $item['price'],

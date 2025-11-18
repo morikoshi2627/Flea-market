@@ -8,10 +8,11 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StripeCheckoutController;
 use App\Http\Controllers\StripeWebhookController;
-
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\RatingController;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
-
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -123,3 +124,38 @@ Route::get('/mypage/purchased', [PurchaseController::class, 'index'])->middlewar
 
 // プロフィール画面_出品した商品一覧（`mypage?page=sell`）
 Route::get('/mypage/listed', [ItemController::class, 'myListings'])->middleware(['auth', 'verified'])->name('mypage.listed');
+
+// 取引中の商品を押すとチャット画面に遷移させる
+Route::get('/transactions/{item}', [TransactionController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('transaction.show');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // チャット画面（一覧）
+    Route::get('/transactions/{item}/chat', [ChatController::class, 'index'])
+        ->name('chat.index');
+
+    // チャット投稿
+    Route::post('/transactions/{item}/chat', [ChatController::class, 'store'])
+        ->name('chat.store');
+
+    // draft保存用ルート
+    Route::get('/chat/{item}/draft', [ChatController::class, 'saveDraft'])
+        ->name('chat.draft');
+
+    // メッセージ編集
+    Route::put('/transactions/{item}/chat/{message}', [ChatController::class, 'update'])
+        ->name('chat.update');
+
+    // メッセージ削除
+    Route::delete('/transactions/{item}/chat/{message}', [ChatController::class, 'destroy'])
+        ->name('chat.destroy');
+
+    // 評価
+    Route::get('/transactions/{item}/rating', [RatingController::class, 'create'])
+        ->name('rating.create');
+
+    Route::post('/transactions/{item}/rating', [RatingController::class, 'store'])
+        ->name('rating.store');
+});

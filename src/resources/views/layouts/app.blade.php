@@ -14,7 +14,9 @@
 <body>
     <header class="header">
         <div class="header-inner">
-            <img class="header-logo" src="{{ asset('storage/item_images/logo.svg') }}" alt="coachtechロゴ">
+            <a href="{{ route('items.index') }}">
+                <img class="header-logo" src="{{ asset('storage/item_images/logo.svg') }}" alt="coachtechロゴ">
+            </a>
 
             <!-- 中央: 商品検索 -->
             <div class="header-search">

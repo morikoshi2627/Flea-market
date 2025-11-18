@@ -47,5 +47,20 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ]
         );
+
+        // 出品三郎
+        User::firstOrCreate([
+            'name' => '出品三郎',
+            'email' => 'seller3@example.com',
+            'password' => Hash::make('password789'),
+            'profile_image' => 'card6.jpg',
+            'postal_code' => '222-3456',
+            'address' => '愛知県名古屋市3-3-3',
+            'building' => 'フリーマーケットビル305',
+            'email_verified_at' => Carbon::now(),
+            'profile_completed' => true,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

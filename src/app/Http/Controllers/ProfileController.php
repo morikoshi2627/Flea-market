@@ -6,28 +6,93 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
 use App\Models\Item;
+use App\Models\Rating;
 
 class ProfileController extends Controller
 {
     public function show(Request $request)
     {
-
         $user = Auth::user();
 
         $buyItems = collect();
         $sellItems = collect();
+        $transactionItems = collect();
 
-        // ?page=buy の場合は購入履歴を取得
-        if ($request->input('page') === 'buy') {
-            $buyItems =  Item::where('buyer_id', $user->id)->latest()->get();
+        // ▼ 取引終了（双方評価済み）の item_id を取得
+        $finishedItemIds = Rating::select('item_id')
+            ->groupBy('item_id')
+            ->havingRaw('COUNT(*) = 2')
+            ->pluck('item_id')
+            ->toArray();
+
+        // ▼ ① page に関係なく「取引中の商品」を取得（取引終了は除外）
+        $allTransactionItems = Item::where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+                ->whereNotNull('buyer_id')
+                ->orWhere('buyer_id', $user->id);
+        })
+            ->whereNotIn('id', $finishedItemIds)
+            ->with('transactionMessages')
+            ->get();
+
+        // ▼ ② 全取引の未読合計数を計算（プロフィール初期表示にも使う）
+        $totalUnread = 0;
+        foreach ($allTransactionItems as $tItem) {
+            $totalUnread += $tItem->transactionMessages()
+                ->where('user_id', '!=', $user->id)
+                ->where('is_read', false)
+                ->count();
         }
 
-        // ?page=sell の場合は出品商品を取得
+        // ▼ ③ ページが transaction の場合のみ並び替えも含めて取得する
+        if ($request->input('page') === 'transaction') {
+
+            $transactionItems = $allTransactionItems->map(function ($item) use ($user) {
+                $item->unread_count = $item->transactionMessages()
+                    ->where('user_id', '!=', $user->id)
+                    ->where('is_read', false)
+                    ->count();
+                return $item;
+            });
+            // ▼ 未読順 → 更新順にソート
+            $transactionItems = $transactionItems
+                ->sortBy([
+                    ['unread_count', 'desc'],
+                    ['updated_at', 'desc'],
+                ])
+                ->values();
+
+            // ▼ 合計未読件数
+            $totalUnread = $transactionItems->sum('unread_count');
+        }
+
+        // ▼ sell
         if ($request->input('page') === 'sell') {
-            $sellItems = \App\Models\Item::where('user_id', $user->id)->latest()->get();
+            $sellItems = Item::where('user_id', $user->id)->latest()->get();
         }
 
-        return view('users.profile', compact('user', 'buyItems', 'sellItems'));
+        // ▼ buy
+        if ($request->input('page') === 'buy') {
+            $buyItems = Item::where('buyer_id', $user->id)->latest()->get();
+        }
+
+        // ▼ 評価平均を取得
+        $ratings = Rating::where('rated_id', $user->id)->pluck('score');
+
+        if ($ratings->count() > 0) {
+            $ratingAvg = round($ratings->avg());   // 四捨五入した平均値（1〜5）
+        } else {
+            $ratingAvg = null;  // 評価がない場合
+        }
+
+        return view('users.profile', compact(
+            'user',
+            'buyItems',
+            'sellItems',
+            'transactionItems',
+            'totalUnread',
+            'ratingAvg'
+        ));
     }
 
     public function edit()
@@ -53,8 +118,8 @@ class ProfileController extends Controller
         // プロフィール画像の処理
         if ($request->hasFile('profile_image')) {
             $path = $request->file('profile_image')->store('item_images', 'public');
-            $filename = basename($path); // ← ファイル名だけ取り出す
-            $user->profile_image = $filename; // ← ファイル名のみをDBに保存
+            $filename = basename($path);
+            $user->profile_image = $filename;
         }
 
         // 他の項目
