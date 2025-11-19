@@ -158,4 +158,4 @@ stripe listen --forward-to localhost:80/webhook/stripe
   - 購入者名  
   - 商品名  
   - 評価依頼メッセージ  
-- Mailhog（http://localhost:8025）で確認可能  
+- Mailhog (http://localhost:8025) で確認可能  
