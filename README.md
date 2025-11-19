@@ -131,7 +131,7 @@ stripe listen --forward-to localhost:80/webhook/stripe
 ![ER図](public/images/Flea-market.png)  
 
 
-## ※今回追加実装した機能一覧(補足)  
+## ※今回Pro試験で追加実装した機能一覧(補足)  
 
 ### 1. 取引チャット機能（メッセージ送受信）  
 - 出品者 & 購入者が商品ごとにチャット可能  
