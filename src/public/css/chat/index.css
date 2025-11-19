@@ -17,28 +17,26 @@
     font-size: 24px;
     margin-bottom: 40px;
     text-align: center;
-    color: #ffff;
+    color: #ffffff;
 }
 
-.trade-item {
-    padding: 5px;
+.trade-item-button {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 0;
     background: #eeefeb;
     border-radius: 10px;
     margin-bottom: 30px;
 }
 
-.trade-item-a {
-    text-decoration: none;
-    color: #333;
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
-
-.trade-item:hover {
+.trade-item-button:hover {
     background: #d5d5d5;
 }
 
@@ -49,6 +47,10 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
+}
+
+.chat-title {
+    font-size: 30px;
 }
 
 .chat-header {
@@ -87,11 +89,11 @@
 }
 
 .item-name {
-    font-size: 30px;
+    font-size: 38px;
 }
 
 .item-price {
-    font-size: 25px;
+    font-size: 28px;
 }
 
 /* チャット一覧 */
@@ -183,12 +185,14 @@
 
 /* 取引完了ボタン */
 .button-complete {
-    padding: 10px 15px;
+    padding: 10px 20px;
     background: #ff8181;
     color: white;
     border-radius: 30px;
     text-decoration: none;
     cursor: pointer;
+    font-size: 16px;
+    width: auto;
 }
 
 .button-complete:hover {
@@ -199,7 +203,7 @@
 .custom-file {
     position: relative;
     display: inline-block;
-    margin-left: 5px
+    margin-left: 5px;
 }
 
 .custom-file-input {
@@ -366,7 +370,6 @@
 
 .rating-subtitle {
     color: #959593;
-    ;
     padding-left: 20px;
 }
 
@@ -434,38 +437,38 @@
     }
 
     .trade-item {
-        padding: 5px;
-        margin-bottom: 20px;
+        padding: 0px;
+        margin-bottom: 0px;
     }
 
     .sidebar-h2 {
         font-size: 20px;
     }
 
-    .trade-item-a {
+    .trade-item-button {
         font-size: 15px;
     }
 
     .header-profile-icon {
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
     }
 
-    .chat-header h1 {
-        font-size: 20px;
+    .chat-title {
+        font-size: 25px;
     }
 
     .button-complete {
-        padding: 8px 12px;
+        padding: 10px 20px;
         font-size: 14px;
     }
 
     .item-name {
-        font-size: 20px;
+        font-size: 25px;
     }
 
     .item-price {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .item-info-img {
@@ -529,5 +532,111 @@
     /* 入力フォーム */
     .chat-form {
         width: 80%;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .sidebar {
+        width: 25%;
+        padding: 8px;
+    }
+
+    .trade-item {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .sidebar-h2 {
+        font-size: 18px;
+    }
+
+    .header-profile-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .trade-item-button {
+        font-size: 15px;
+    }
+
+    .chat-title {
+        font-size: 18px;
+    }
+
+    .button-complete {
+        padding: 10px 10px;
+        font-size: 11px;
+    }
+
+    .item-name {
+        font-size: 20px;
+    }
+
+    .item-price {
+        font-size: 18px;
+    }
+
+    .item-info-img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .profile-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .message-left,
+    .message-right {
+        padding: 15px;
+        max-width: 70%;
+    }
+
+    .message-text {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .message-img {
+        width: 120px;
+    }
+
+    .chat-form-input {
+        font-size: 14px;
+    }
+
+    .custom-file-label {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .rating-modal {
+        width: 300px;
+        height: 260px;
+    }
+
+    .rating-title {
+        font-size: 20px;
+        padding: 15px;
+    }
+
+    .rating-subtitle {
+        font-size: 14px;
+    }
+
+    .star-label {
+        width: 45px;
+        height: 45px;
+    }
+
+    .rating-submit {
+        font-size: 16px;
+        padding: 6px 16px;
+    }
+
+    /* 入力フォーム */
+    .chat-form {
+        width: 75%;
     }
 }

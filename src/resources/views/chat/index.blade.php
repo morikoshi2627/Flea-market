@@ -13,13 +13,12 @@
 
         @forelse ($otherTrades as $trade)
         <div class="trade-item">
-            <form action="{{ route('chat.draft', ['item' => $item->id]) }}" method="GET">
-                <input type="hidden" name="message" value="{{ old('message', $draft) }}">
+            <form class="trade-form" action="{{ route('chat.draft', ['item' => $item->id]) }}" method="GET" id="form-{{ $trade->id }}">
+                <input type="hidden" name="message" value="">
                 <input type="hidden" name="redirect_to" value="{{ route('transaction.show', $trade->id) }}">
-
-                <a href="{{ route('chat.draft', ['item' => $item->id,'message' => request()->input('message'),'redirect_to' => route('transaction.show', $trade->id),]) }}" class="trade-item-a">
+                <button type="submit" class="trade-item-button">
                     {{ $trade->name }}
-                </a>
+                </button>
             </form>
         </div>
         @empty
@@ -36,7 +35,7 @@
                     src="{{ asset('storage/item_images/' . ($partner->profile_image ?? 'default.png')) }}"
                     alt="{{ $partner->name }}のプロフィール画像">
 
-                <h1>「{{ $partner->name }}」さんとの取引画面</h1>
+                <h1 class="chat-title">「{{ $partner->name }}」さんとの取引画面</h1>
             </div>
             {{-- 取引完了ボタン --}}
             @if (auth()->id() === $item->buyer_id)
@@ -205,4 +204,15 @@
 
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    document.querySelectorAll(".trade-item form").forEach(form => {
+        form.addEventListener("submit", function(e) {
+            let draft = document.querySelector(".chat-form-input").value;
+            form.querySelector("input[name='message']").value = draft;
+        });
+    });
+</script>
 @endsection

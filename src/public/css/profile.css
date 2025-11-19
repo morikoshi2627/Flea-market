@@ -11,7 +11,7 @@
     gap: 150px;
     flex-wrap: wrap;
     padding: 20px;
-    margin: 10px 0;
+    margin: 25px 0;
 }
 
 .profile-info {
@@ -21,26 +21,31 @@
 }
 
 .profile-img {
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.user-name {
-    font-size: 24px;
+.name-box {
     margin-left: 30px;
+    text-align: center;
+}
+
+.user-name {
+    font-size: 30px;
     font-weight: bold;
 }
 
 .edit-button {
-    padding: 8px 16px;
+    padding: 10px 20px;
     border: 1px solid #ff5655;
     color: #ff5655;
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.2s;
+    font-size: 20px;
 }
 
 /* 出品購入欄 */
@@ -70,8 +75,6 @@
     color: #ff5655;
 }
 
-
-
 /* 商品一覧 */
 .history-grid {
     display: grid;
@@ -85,18 +88,16 @@
 }
 
 .item-card-img {
-    width: 100%;
+    width: 80%;
     height: auto;
     aspect-ratio: 1 / 1;
-    /* 正方形を維持 */
     object-fit: cover;
+    border-radius: 4px;
 }
 
 .item-card-inner {
     text-decoration: none;
 }
-
-
 
 .item-name {
     margin-top: 8px;
@@ -111,12 +112,10 @@
     border-radius: 50%;
     padding: 4px 6px;
     font-size: 16px;
-    border-radius: 50%;
     font-weight: bold;
     margin-left: 6px;
 }
 
-/* 親要素を基準にバッジを配置するため必要 */
 .item-card-inner {
     position: relative;
     display: block;
@@ -154,7 +153,7 @@
         gap: 90px;
         flex-wrap: wrap;
         padding: 20px;
-        margin: 0;
+        margin: 10px;
     }
 
     .history-title {
@@ -177,10 +176,6 @@
     .item-card {
         width: 280px;
         text-align: left;
-    }
-
-    .item-card-inner {
-        text-decoration: none;
     }
 
     .item-card-img {

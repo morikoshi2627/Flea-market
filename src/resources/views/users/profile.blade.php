@@ -12,10 +12,10 @@
             <img class="profile-img" src="{{ asset('storage/item_images/' . ($user->profile_image ?? 'default.png')) }}"
                 alt="プロフィール画像" width="100" onerror="this.src='{{ asset('storage/item_images/default.png') }}'">
             <div class="name-box">
-                <p class="user-name">{{ $user->name }}
+                <p class="user-name">{{ $user->name }}</p>
 
-                    {{-- 評価平均（星5つ） --}}
-                    @if (!is_null($ratingAvg))
+                {{-- 評価平均（星5つ） --}}
+                @if (!is_null($ratingAvg))
                 <div class="rating-stars">
 
                     @for ($i = 1; $i <= 5; $i++)
@@ -29,7 +29,6 @@
                         @endfor
                 </div>
                 @endif
-                </p>
             </div>
         </div>
 

@@ -161,10 +161,14 @@ class ChatController extends Controller
     // draft保存
     public function saveDraft(Request $request, Item $item)
     {
-        // 入力フォームの値を session に保存
-        session(["draft_message_{$item->id}" => $request->input('message')]);
 
-        // 保存後、遷移先へ飛ばす
+        // null のときは空文字で保存（バグ防止）
+        $message = $request->input('message', '');
+
+        // セッションへ保存
+        session(["draft_message_{$item->id}" => $message]);
+
+        // 移動先へリダイレクト
         return redirect($request->input('redirect_to'));
     }
 }
